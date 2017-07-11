@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,24 @@
  * limitations under the License.
  */
 
-dependencies {
-    compile libraries.groovy
-    compile project(':core')
-    compile project(":ide")
-    compile project(':platformNative')
-    compile project(':languageNative')
-    compile project(':testingNative')
-    compile project(':ideXcodeSupport')
-}
+package org.gradle.ide.xcode.internal;
 
-useTestFixtures()
-useTestFixtures(project: ":platformNative")
-useClassycle()
+import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
+
+public class IndexingSwiftTarget extends XcodeTarget {
+    private final Set<File> sources = new HashSet<File>();
+
+    public IndexingSwiftTarget(String name) {
+        super(name);
+    }
+
+    public Set<File> getSources() {
+        return sources;
+    }
+
+    public void setSources(Set<File> sources) {
+        this.sources.addAll(sources);
+    }
+}

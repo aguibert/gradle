@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 the original author or authors.
+ * Copyright 2017 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,21 @@
  * limitations under the License.
  */
 
-dependencies {
-    compile libraries.groovy
-    compile project(':core')
-    compile project(":ide")
-    compile project(':platformNative')
-    compile project(':languageNative')
-    compile project(':testingNative')
-    compile project(':ideXcodeSupport')
-}
+package org.gradle.ide.xcode.fixtures
 
-useTestFixtures()
-useTestFixtures(project: ":platformNative")
-useClassycle()
+import com.dd.plist.NSDictionary
+import org.gradle.test.fixtures.file.TestFile
+
+class SchemeFile {
+    final TestFile file
+    final String name
+    final NSDictionary content
+    final Node schemeXml
+
+    SchemeFile(TestFile schemeFile) {
+        schemeFile.assertIsFile()
+        file = schemeFile
+        name = file.name.replace(".xcscheme", "")
+        schemeXml = new XmlParser().parse(file)
+    }
+}
