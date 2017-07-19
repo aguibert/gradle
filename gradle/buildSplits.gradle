@@ -63,6 +63,7 @@ def buckets = [
         ":platformBase",
         ":diagnostics",
         ":ideNative",
+        ":ideXcodeSupport",
         ":javascript",
         ":languageJvm",
         ":ear"
