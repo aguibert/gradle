@@ -44,7 +44,7 @@ public class DefaultConfigurableFileCollection extends CompositeFileCollection i
     public DefaultConfigurableFileCollection(String displayName, PathToFileResolver fileResolver, TaskResolver taskResolver, Object... files) {
         this.displayName = displayName;
         this.resolver = fileResolver;
-        this.files = new LinkedHashSet<Object>(Arrays.asList(files));
+        this.files = files == null ? new LinkedHashSet<Object>() : new LinkedHashSet<Object>(Arrays.asList(files));
         buildDependency = new DefaultTaskDependency(taskResolver);
     }
 
